@@ -124,9 +124,9 @@ def make_word_tree():
 def make_squardle(row: int, col: int) -> list[list[str]]:
     "Makes squaredle grid"
     grid = []
-    for c in range(col):
+    for r in range(row):
         letter_row = []
-        for r in range (row):
+        for c in range (col):
             letter = input(f"Input letter in row {r + 1} and column {c + 1}? ").upper()
             letter_row.append(letter)
         grid.append(letter_row)
@@ -153,6 +153,31 @@ def find_words_with_start(string: str, letter: Vertex, squaredle_graph: Squaredl
     for l in letter.neighbours:
         if l not in used_letters and l.value in word_tree.subtrees:
             wordlist += find_words_with_start(string + l.value,
+                                              l, squaredle_graph, word_tree.subtrees[l.value],
+                                              used_letters + [l])
+    return wordlist
+
+def find_near_misses(squaredle_graph, word_tree) -> set:
+    wordbank = []
+    for letter in squaredle_graph.vertices.values():
+        if letter.value != '#' and letter.value not in word_tree.subtrees:
+            raise ValueError
+        elif letter.value != '#':
+            wordbank += find_near_miss_start(letter.value, letter, squaredle_graph, word_tree.subtrees[letter.value], [letter])
+    return set(wordbank)
+
+def find_near_miss_start(string: str, letter: Vertex, squaredle_graph: Squaredle, word_tree: Tree
+                         , used_letters: list[Vertex]) -> list:
+    wordlist = []
+    if len(string) >= 5:
+        for l in word_tree.subtrees:
+            if l != 'END' and 'END' in word_tree.subtrees[l].subtrees:
+                wordlist.append(string + l)
+    for l in letter.neighbours:
+        if l not in used_letters and l.value in word_tree.subtrees:
+            if string + l.value in wordlist:
+                wordlist.remove(string + l.value)
+            wordlist += find_near_miss_start(string + l.value,
                                               l, squaredle_graph, word_tree.subtrees[l.value],
                                               used_letters + [l])
     return wordlist

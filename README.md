@@ -13,4 +13,4 @@ There's many ways we could define a word that almost works. Some possible defini
 - All the letters needed for the word are in the grid and connected, but not connected in the right order.
 - Proper nouns
 
-For this code, I will define a word that almost work to be words that work for every letter until the very last letter. (So the word "definition" will be a word that almost works if you can make the string "definitio" in the squaredle).
+For this code, I will define a word that almost work to be 6 or more lettered words that work for every letter until the very last letter. (So the word "definition" will be a word that almost works if you can make the string "definitio" but not "defenition" in the squaredle).

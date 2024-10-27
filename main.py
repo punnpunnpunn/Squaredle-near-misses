@@ -5,4 +5,6 @@ row = int(input("How many rows? "))
 col = int(input("How many columns? "))
 grid = project.make_squardle(row, col)
 
-print(sorted(list(project.find_words(grid, word_tree))))
+near_misses = sorted(list(project.find_near_misses(grid, word_tree)))
+near_misses.sort(key=len, reverse=True)
+print(near_misses)
