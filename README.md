@@ -14,3 +14,6 @@ There's many ways we could define a word that almost works. Some possible defini
 - Proper nouns
 
 For this code, I will define a word that almost work to be 6 or more lettered words that work for every letter until the very last letter. (So the word "definition" will be a word that almost works if you can make the string "definitio" but not "defenition" in the squaredle).
+
+## How to run the program.
+Just download dictionary.txt, project.py and main.py and run main.py. The program will ask you to input the number of rows and columns of the squaredle, then input the letters in each position on the squaredle. Then it'll find and output all the near miss words it finds.
